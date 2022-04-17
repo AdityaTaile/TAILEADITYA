@@ -1,36 +1,32 @@
-grid = [['.', '.', '.', '.', '.', '.'],
-        ['.', 'O', 'O', '.', '.', '.'],
-        ['O', 'O', 'O', 'O', '.', '.'],
-        ['O', 'O', 'O', 'O', 'O', '.'],
-        ['.', 'O', 'O', 'O', 'O', 'O'],
-        ['O', 'O', 'O', 'O', 'O', '.'],
-        ['O', 'O', 'O', 'O', '.', '.'],
-        ['.', 'O', 'O', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.']]
+def main():
+    import os, re
 
-newString = ''
+    # Get list of all .txt files
+    all_files = os.listdir("./")  # use current working directory
+    text_files = []
+    for file in all_files:
+        if file.endswith(".txt"):
+            text_files.append(file)
 
-for i in range(len(grid)):
-    newString += str(grid[i][0])
+    # Get regular expression
+    regex = input("Enter regular expression to search for: ")
+    search_regex = re.compile(regex)
 
-newString1 = '\n'
-for i in range(len(grid)):
-    newString1 += str(grid[i][1])
+    # Open .txt file
+    for file in text_files:
+        input_file = open(file)
+        input_content = input_file.readlines()
+        input_file.close()
 
-newString2 = '\n'
-for i in range(len(grid)):
-    newString2 += str(grid[i][2])
+        # Search for regex in file
+        for line in input_content:
+            match_objects = search_regex.findall(line)
+            if match_objects is not None:
+                # Print result
+                for match in match_objects:
+                    print(match)
 
-newString3 = '\n'
-for i in range(len(grid)):
-    newString3 += str(grid[i][3])
 
-newString4 = '\n'
-for i in range(len(grid)):
-    newString4 += str(grid[i][4])
 
-newString5 = '\n'
-for i in range(len(grid)):
-    newString5 += str(grid[i][5])
-
-print(newString+newString1+newString2+newString3+newString4+newString5)
+if __name__ == '__main__':
+    main()
