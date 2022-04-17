@@ -1,0 +1,339 @@
+Objective:- Assignments will help trainees to understand the basics of unix command and how to explore and use it.
+
+
+Assignments:-
+
+List the contents of a directory and their attributes
+
+ls 
+
+Long list the content with file, directory ownership, permissions,sizes, etc…
+
+ls -l
+
+Display the size of the file in human readable format
+
+ls -lh filename
+
+
+Show all files and folders including hidden one
+
+ls -a
+
+list directories recursively
+
+ls -R
+
+Sort the files by size with largest at the top
+
+ls -S
+
+Sort the files by last time modified displaying the newest first.
+
+ls -t
+
+Diplay the location of a program/command, where it is installed.
+
+which command
+which program
+
+Which command is used to switch directory from one to another
+
+cd command
+
+List all the environment variables set for the current shell environment
+
+env
+
+Did you notice something in the output of "env" command?
+
+yes
+
+Which command is used to print the text or any variables value in the Console/Terminal?
+
+echo command
+
+Print the value of the env variable "PATH" on the console
+
+PATH=/usr/local/bin:/bin:/usrsr/local/sbin:/bin:/usr
+ 
+
+
+
+
+how do you change the currrently logged in user to another user?
+
+su 
+Is linux a case-sensitive operating system?
+
+yes
+
+
+Is, "Ls" same as "ls"?
+
+no
+
+Display your currently logged in user
+who command
+
+how do you change the currrently logged in user to another user?
+
+su  command(followed by new user name) 
+
+Which command is used to leave a shell environment that you are currently logged in to?
+
+exit
+
+How do you reboot the system?
+
+sign in as sudo to root account
+then enter sudo reboot
+or
+sudo systemctl reboot 
+
+How do you shutdown the system?
+ 
+ shutdown /s
+ 
+
+Display all the major running processes in the system
+
+ps
+
+Understand the output of command used in above question of displaying processes, explain the meaning of each column and what data it displays?
+
+displays the process ID (PID), TTY, processor time used (TIME), and name of the command .
+
+Display the name of the system kernel
+
+uname
+
+display the kernel release number
+
+uname -r 
+
+display teh machine type of the current kernel
+uname -m 
+
+Display the name of the operating system that the kernel is running on
+
+uname -o
+
+Display all info that uname command can show.
+
+NAME
+       uname - print system information
+
+SYNOPSIS
+       uname [OPTION]...
+
+DESCRIPTION
+       Print certain system information.  With no OPTION, same as -s.
+
+       -a, --all
+              print all information, in the following order, except omit -p and -i if unknown:
+
+       -s, --kernel-name
+              print the kernel name
+
+       -n, --nodename
+              print the network node hostname
+
+       -r, --kernel-release
+              print the kernel release
+
+       -v, --kernel-version
+              print the kernel version
+
+       -m, --machine
+              print the machine hardware name
+Display the name of directory that you are currently pointing to
+
+pwd
+
+change the current directory to another directory that you have in your system.
+
+cd
+
+Go up one directory
+
+cd..
+
+Return to last directory
+cd -
+
+change the current directory to home(logged in user's) directory
+
+cd ~
+
+How to check all the command used from the prompt (Command History)
+
+history
+
+In which file the history of commands are stored in?
+
+.bash_history
+
+How many lines of history does the system keep and from where you can change it?
+
+1000 and HISTSIZE
+How can you modify bash's history behaviour
+
+PROMPT_COMMAND
+to delete whole history : history -c 
+
+Display all the commands entered so far, now, try to run a particular command from the history list without typing that command.
+
+first press control+R
+then type firt letter of command you want to execute
+automatically command entered
+
+NOTE:- TAB key is your friend when it comes to command completion and having long file and directory names autocompleted at the bash prompt for you. JUST BE LAZY AND USE TAB KEY FOR AUTO COMPLETION ;-)
+
+What are the different types of shell and where are they used and how do we use them?
+
+The C Shell – arithmetic and C-like expression syntax.
+The Bourne Shell – faster,more preffered but lacks built-in arithmetic and logical expression handling (sun solaris)
+The Korn Shell- It has interactive features. It includes features like built-in arithmetic and C-like arrays, functions, and string-manipulation facilities.It is faster than C shell. It is compatible with script written for C s
+GNU Bourne-Again Shell – Denoted as bash.:It is compatible to the Bourne shell. It includes features from Korn and Bourne shell.
+
+
+What is the difference between login shell and non-login shell?
+A login shell is the shell given to the user upon their login
+Non-login shells do not need to be one per login, so you may get any number of them after login 
+
+
+How do we start login shell and non-login shell?
+
+loginshell - first login,then use
+non-login - use anytime without login 
+
+What happens when you start a login shell (which files are read and used and Why)?
+
+it first reads and executes commands from the file /etc/profile 
+reason : it check for user details if available or not.
+
+What happens when you start a non-login shell (Which files are read and used and Why)?
+
+
+When an interactive shell that is started, Bash reads and executes commands from ~/. bashrc , if that file exists.
+reason : it prevent shell from reading files ~/
+
+
+What are Shell Variables, list major shell variables and what do they represent?
+
+A shell variable is nothing more than a pointer to the actual data.
+Environment variables – Variables that are exported to all processes spawned by the shell.
+Shell (local) variables – Variables that affect only the current shell.
+
+How we see all our env variables?
+
+env 
+
+How we see all env variables in alphabical order?
+
+env | sort
+
+What Format does the env var and its values are stored?
+
+ AUTOEXEC. BAT
+ 
+ 
+How do you create your own varible?
+
+by assign value using =
+
+
+Difference between Local/Shell variables to Global Variable
+
+local var scope is limited to function in which he declared.it cant use outside function 
+global var can be accessible in whole program/shell 
+
+
+Making a variable accessible from other the shell in the system.
+
+read-only command 
+
+
+What is Globbing? Explain in depth with examples?
+
+The Bash shell feature that is used for matching or expanding specific types of patterns is called globbing. Globbing is mainly used to match filenames or searching for content in a file. Globbing uses wildcard characters to create the pattern.
+
+List all entries with extension ".sh"
+
+
+ls *.sh
+
+List all entries with numbers in it.
+
+ls +([0-9])
+
+
+List all entries that starts with a character and ends with a number
+
+ls | grep '^[A-Z]' '[0-9]$'
+
+
+List all entries that name length more than 5 characters
+
+ls -A -d ?????*
+
+
+What is Quoting? and Why do we need it?
+
+Quoting is used to remove the special meaning of certain characters or words to the shell. Quoting can be used to disable special treatment for special characters
+
+
+How do you find a particular files/directories based on a particular search criteria?
+HINT:- look for commands -> locate, find and whereis
+
+find [where to start searching from]
+ [expression determines what to find] [-options] [what to find]
+ 
+ 
+Write major difference between locate, find and whereis?
+
+find is what you use when you want to search by particular criteria and also manipulate files. It has many more option
+locate is used to scan the whole system quickly for something you have no idea.also it's fast because it uses a binary database to index the system
+whereis command simply returns the location of the executables, the man pages and the sources of a program.
+
+
+
+
+Explain the Linux File System.
+
+A Linux file system is a structured collection of files on a disk drive or a partition
+
+
+Explain absolute and Relative Paths
+
+absolute path is defined as specifying the location of a file or directory from the root directory(/).it remain same always.
+Relative path is defined as the path related to the present working directly(pwd).
+
+
+What are the different ways of creating a File in linux System? Write an example of each and the difference between them.
+
+touch : it help to create empty files. eg : touch Adi.txt creates empty text files
+cat : cat help to create files with some information.eg echo "My name is Adi" >Adi.txt 
+
+ 
+In how many ways we can delete the files from linux system? write an example of each and teh difference between them.
+
+rm : it direct delete files.
+rm -i : it first confirm whether you want to delete file or not.
+unlink file : you can delete file by unlink it.
+
+
+Archiving files using linux command, write a command to archive set of files from linux commands.
+
+tar -cvf filename.tar 
+
+we use ‘-f’ for  file name.
+we use the ‘-v’ (“verbose”) option to have tar output the names of files as they are processed (optional)
+
+ 
+Extract the archived files from the above step.
+
+ tar -xvf project.tar
+
+we use -x for extract files.
