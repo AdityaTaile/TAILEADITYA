@@ -1,0 +1,317 @@
+Q --1 
+
+public class Q2_Prime {
+
+public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    
+    System.out.println(isPrime(19));
+}
+public static boolean isPrime(int number)
+{
+    for(int i = 2; i < number; i++)
+{
+    if(number % i == 0)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+}
+ Q--2
+
+b)class Example { 
+   static void main(String[] args) { 
+      String a = 'Hello Single'; 
+      String b = "Hello Double"; 
+      String c = "'Hello Triple" + "Multiple lines'";
+		
+      println(a); 
+      println(b); 
+      println(c); 
+   } 
+}
+c) function checkPalindrom(palindrom)
+{
+
+    for( var i = palindrom.length; i > 0; i-- )
+    {
+        if( palindrom[i] = palindrom.charAt(palindrom.length)-1 )
+        {
+            document.write('the word is palindrome.');
+        }else{
+            document.write('the word is not palindrome!');
+        }
+    }
+}
+checkPalindrom('wordthatwillbechecked');
+
+d) const str = 'The quick brown fox jumps over the lazy dog.';
+
+const words = str.split(' ');
+console.log(words[3]);
+// expected output: "fox"
+
+const chars = str.split('');
+console.log(chars[8]);
+// expected output: "k"
+
+const strCopy = str.split();
+console.log(strCopy);
+// expected output: Array ["The quick brown fox jumps over the lazy dog."]
+
+Q--3
+using namespace std;
+ 
+// Function to print the sorted array of string
+void printArraystring(string,int);
+ 
+// Function to Sort the array of string
+// according to lengths. This function
+// implements Insertion Sort.
+void sort(string s[], int n)
+{
+    for (int i=1 ;i<n; i++)
+    {
+        string temp = s[i];
+ 
+        // Insert s[j] at its correct position
+        int j = i - 1;
+        while (j >= 0 && temp.length() < s[j].length())
+        {
+            s[j+1] = s[j];
+            j--;
+        }
+        s[j+1] = temp;
+    }
+}
+  
+// Function to print the sorted array of string
+void printArraystring(string str[], int n)
+{
+    for (int i=0; i<n; i++)
+        cout << str[i] << " ";
+}
+ 
+// Driver function
+int main()
+{
+    string arr[] = {"GeeksforGeeks", "I", "from", "am"};
+    int n = sizeof(arr)/sizeof(arr[0]);
+     
+    // Function to perform sorting
+    sort(arr, n);
+ 
+    // Calling the function to print result
+    printArraystring(arr, n);
+     
+    return 0;
+}
+
+
+Q--4
+using namespace std;
+ 
+/* Linked list node */
+class Node {
+public:
+    int data;
+    Node* next;
+};
+ 
+/* Function to create a
+new node with given data */
+Node* newNode(int data)
+{
+    Node* new_node = new Node();
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+ 
+/* Function to insert a node at the
+beginning of the Singly Linked List */
+void push(Node** head_ref, int new_data)
+{
+    /* allocate node */
+    Node* new_node = newNode(new_data);
+    /* link the old list off the new node */
+    new_node->next = (*head_ref);
+    /* move the head to point to the new node */
+    (*head_ref) = new_node;
+}
+ 
+/* Adds contents of two linked lists and
+return the head node of resultant list */
+Node* addTwoLists(Node* first, Node* second)
+{
+    // res is head node of the resultant list
+    Node* res = NULL;
+    Node *temp, *prev = NULL;
+    int carry = 0, sum;
+ 
+    // while both lists exist
+    while (first != NULL || second != NULL) {
+        // Calculate value of next digit in resultant list.
+        // The next digit is sum of following things
+          // (i) Carry
+        // (ii) Next digit of first list (if there is a next digit)
+        // (ii) Next digit of second list (if there is a next digit)
+        sum = carry + (first ? first->data : 0) + (second ? second->data : 0);
+        // update carry for next calculation
+        carry = (sum >= 10) ? 1 : 0;
+        // update sum if it is greater than 10
+        sum = sum % 10;
+        // Create a new node with sum as data
+        temp = newNode(sum);
+        // if this is the first node then set it as head of the resultant list
+        if (res == NULL)
+            res = temp;
+        // If this is not the first node then connect it to the rest.
+        else
+            prev->next = temp;
+       
+        // Set prev for next insertion
+        prev = temp;
+ 
+        // Move first and second pointers to next nodes
+        if (first)
+            first = first->next;
+        if (second)
+            second = second->next;
+    }
+    if (carry > 0)
+        temp->next = newNode(carry);
+    // return head of the resultant list
+    return res;
+}
+ 
+Node* reverse(Node* head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+    // reverse the rest list and put the first element at the end
+    Node* rest = reverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    // fix the head pointer
+    return rest;
+}
+ 
+// A utility function to print a linked list
+void printList(Node* node)
+{
+    while (node != NULL) {
+        cout << node->data << " ";
+        node = node->next;
+    }
+    cout << endl;
+}
+ 
+/* Driver code */
+int main(void)
+{
+    Node* res = NULL;
+    Node* first = NULL;
+    Node* second = NULL;
+ 
+    // create first list 7->5->9->4->6
+    push(&first, 6);
+    push(&first, 4);
+    push(&first, 9);
+    push(&first, 5);
+    push(&first, 7);
+    printf("First List is ");
+    printList(first);
+ 
+    // create second list 8->4
+    push(&second, 4);
+    push(&second, 8);
+    cout << "Second List is ";
+    printList(second);
+ 
+    // reverse both the lists
+    first = reverse(first);
+    second = reverse(second);
+    // Add the two lists
+    res = addTwoLists(first, second);
+ 
+    // reverse the res to get the sum
+    res = reverse(res);
+    cout << "Resultant list is ";
+    printList(res);
+    return 0;
+}
+ 
+Q--5
+import datetime # we will use this for date objects
+
+class Person:
+
+    def __init__(self, name, surname, birthdate, address, telephone, email):
+        self.name = name
+        self.surname = surname
+        self.birthdate = birthdate
+
+        self.address = address
+        self.telephone = telephone
+        self.email = email
+
+    def age(self):
+        today = datetime.date.today()
+        age = today.year - self.birthdate.year
+
+        if today < datetime.date(today.year, self.birthdate.month, self.birthdate.day):
+            age -= 1
+
+        return age
+
+person = Person(
+    "Jane",
+    "Doe",
+    datetime.date(1992, 3, 12), # year, month, day
+    "No. 12 Short Street, Greenville",
+    "555 456 0987",
+    "jane.doe@example.com"
+)
+
+print(person.name)
+print(person.email)
+print(person.age())
+
+Q--6
+package com.example.money;
+
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+
+import java.util.Locale;
+
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
+import javax.money.MonetaryRounding;
+import javax.money.format.MonetaryAmountFormat;
+import javax.money.format.MonetaryFormats;
+
+import org.junit.Test;
+
+public class MoneyTest {
+
+    @Test
+    public void testMoneyApi() {
+        MonetaryAmount eurAmount1 = Monetary.getDefaultAmountFactory().setNumber(1.1111).setCurrency("EUR").create();
+        MonetaryAmount eurAmount2 = Monetary.getDefaultAmountFactory().setNumber(1.1141).setCurrency("EUR").create();
+
+        MonetaryAmount eurAmount3 = eurAmount1.add(eurAmount2);
+        assertThat(eurAmount3.toString(), is("EUR 2.2252"));
+
+        MonetaryRounding defaultRounding = Monetary.getDefaultRounding();
+        MonetaryAmount eurAmount4 = eurAmount3.with(defaultRounding);
+        assertThat(eurAmount4.toString(), is("EUR 2.23"));
+
+        MonetaryAmountFormat germanFormat = MonetaryFormats.getAmountFormat(Locale.GERMAN);
+        assertThat(germanFormat.format(eurAmount4), is("EUR 2,23") );
+    }
+}
