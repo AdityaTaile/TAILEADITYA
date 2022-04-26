@@ -1,0 +1,43 @@
+
+-----Create an overlay network called prices-overlay-net-----
+
+1. For Create the prices-overlay-net overlay network.
+
+---command---
+
+docker network create --driver overlay prices-overlay-net
+
+-----Create a service called base-price-----
+
+2. For Create a service called base-price with 3 replicas using the linuxacademycontent/prices-base-price:1 image.
+  Configure the service to use the prices-overlay-net network.
+  
+---command---
+
+docker service create --name base-price --network prices-overlay-net --replicas 3 linuxacademycontent/prices-base-price:1
+
+-----Create the total-price service-----
+
+3. For Create a service called sales with 3 replicas using the linuxacademycontent/prices-sales:1 image.
+   Configure the service to use the prices-overlay-net network.
+   
+---command---
+
+docker service create --name sales --network prices-overlay-net --replicas 3 linuxacademycontent/prices-sales:1
+
+-----Create the total-price service-----
+
+3. For Create the total-price service with 2 replicas using the linuxacademycontent/prices-total-price:1 image. 
+   Configure the service to use the prices-overlay-net
+
+---command---
+
+docker service create --name total-price --network prices-overlay-net --replicas 2 -p 8080:80 linuxacademycontent/prices-total-price:1
+
+-----Verify that you get the total price data-----
+
+4. For Verify that everything is set up correctly
+
+---command---
+
+curl localhost:8080
