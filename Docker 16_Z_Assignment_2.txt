@@ -1,0 +1,39 @@
+Your company has recently decided to use Docker to run containers in production. They have built some Docker images to run their own proprietary software and need a place to store and manage these images. You have been asked to build a secure, private Docker registry for use by the company. In order to verify that everything works, you have also been asked to configure a Docker workstation server to push to and pull from the registry.
+
+To complete this lab, ensure that the following requirements are met for the registry:
+
+1. A private Docker registry is running on the Docker registry server using version 2 of the registry image.
+2. The container name for the registry should be registry.
+3. The registry should always automatically restart if it stops or the Docker daemon or server restarts.
+4. The registry should require authentication. Set up an initial account with the username docker and the password d0ck3rrU73z.
+5. The registry should use TLS with a self-signed certificate.
+6. The registry should listen on port 443.
+
+
+Set up the Docker workstation server to meet the following requirements:
+
+1. Docker is logged in to the private registry.
+
+Answer :- docker login some.docker.host.com
+         Username: docker
+	   Password: d0ck3rrU73z
+
+2. Docker is configured to accept the self-signed cert. Do not turn off certificate verification using the insecure-registries setting.
+
+Answer :- sudo docker run -p 5000:5000 --restart=always --name registry -v `pwd`/certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt -e REGISTRY_HTTP_TLS_KEY=/certs/server.key -v /root/Documents:/var/lib/registry/ registry:2
+
+
+3. To confirm that everything is working, push a test image called ip-10-0-1-101:443/test-image:1 to the private registry. You can pull any image from Docker hub and tag it with ip-10-0-1-101:443/test-image:1 as a test.
+
+Answer :-  Push an test-image == docker push ip-10-0-1-101:443/test-image:1
+
+	     Pull test-image    == docker pull nginx 
+
+	     Tag pulled Image   == docker tag ip-10-0-1-101:443/test-image:1:5000/nginx
+
+4. Delete the test image locally and pull it from the registry.
+
+Answer :-  Deleting test image == docker rmi localhost:5000/test-image:1
+
+	     Pull test image     == docker pull localhost:5000/test-image:1
+
