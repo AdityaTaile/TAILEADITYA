@@ -1,0 +1,34 @@
+Learning Objectives:-
+Create the cron job in the cluster
+Allow the cron job to run successfully
+
+Problem Statement:-
+Your company has a simple data cleanup process that is run periodically for maintenance purposes. They would like to stop doing this manually in order to save time, so you have been asked to implement a cron job in the Kubernetes cluster to run this process. Create a cron job called cleanup-cronjob using the linuxacademycontent/data-cleanup:1 image. Have the job run every minute with the following cron expression: */1 * * * *.
+
+
+cron-job.yaml
+apiVersion: apps/v1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox:1.28
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+
+2) Running the CronJob
+Command: kubectl create -f cronjob.yaml
+
+3) Getting CronJobs
+Command : kubectl get jobs
